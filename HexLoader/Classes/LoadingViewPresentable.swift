@@ -32,8 +32,8 @@ extension LoadingViewPresentable where Self: UIViewController {
     }
 }
 
+//MARK: - Public Utility Methods
 extension UIViewController: LoadingViewPresentable {
-    
     public func startLoading() {
         view.addSubview(mainLoadingView)
         mainLoadingView.isHidden = false

@@ -26,19 +26,19 @@ class ViewController: UIViewController {
 //MARK: - Actiosn
 extension ViewController {
     @IBAction func showDefaultLoader() {
-        HexagonLoaderConfig.shared.backgroundType = .visualEffectsViewDark
+        HexagonLoaderConfig.shared.backgroundType = .dark
         stopLoaderInFiveSeconds()
         startLoading()        
     }
     @IBAction func showLoaderWithTransparentbackground() {
-        HexagonLoaderConfig.shared.backgroundType = .transparentWithBackdrop
-        HexagonLoaderConfig.shared.transparentBackdropColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        HexagonLoaderConfig.shared.backgroundType = .transparent
+        HexagonLoaderConfig.shared.backdropOverlayColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         startLoading()
         stopLoaderInFiveSeconds()
     }
     
     @IBAction func showDefaultLoaderWithLightEffect() {
-        HexagonLoaderConfig.shared.backgroundType = .visualEffectsViewLight
+        HexagonLoaderConfig.shared.backgroundType = .light
         startLoading()
         stopLoaderInFiveSeconds()
     }

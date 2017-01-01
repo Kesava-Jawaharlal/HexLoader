@@ -28,9 +28,9 @@ private let backdropViewLength: CGFloat = 250
 private let numberOfSides: CGFloat = 6
 
 public enum HexagonLoaderBackground {
-    case visualEffectsViewLight
-    case visualEffectsViewDark
-    case transparentWithBackdrop
+    case light
+    case dark
+    case transparent
 }
 
 /**
@@ -44,19 +44,19 @@ public struct HexagonLoaderConfig {
     public let sideLength: CGFloat = 50
     
     /**
-     *  Inner offset for each shape
+     *  Inner offset for each Hexagon
      */
-    public let shapesInnerOffset: CGFloat = 0
+    public let hexagonInnerOffset: CGFloat = 0
     
     /**
-     *  Color of shapes
+     *  Color of Hexagon
      */
-    public var shapeColor = UIColor.white
+    public var hexagonBackgroundColor = UIColor.white
     
     /**
-     *  Color of shape border
+     *  Color of Hexagon border
      */
-    public var shapeBorderColor = UIColor.red
+    public var hexagonBorderColor = UIColor.red
     
     /**
      *  Speed of the spinner
@@ -66,10 +66,22 @@ public struct HexagonLoaderConfig {
     /**
      *  Background Type
      */
-    public var backgroundType: HexagonLoaderBackground = .transparentWithBackdrop
+    public var backgroundType: HexagonLoaderBackground = .transparent
     
-    public var transparentBackdropColor: UIColor = .gray
+    /**
+    * Boolean to indicate if a backdrop over lay is needed to be displayed
+    */
+    public var displayBackdropOverlay: Bool = true
     
+    /**
+     *  Backdrop Overlay Color. This will be used only if'displayBackdropOverlay' var is set to true
+     */
+    public var backdropOverlayColor: UIColor = .gray
+    
+    /**
+     *  Backdrop Overlay Corner Radius. This will be used only if'displayBackdropOverlay' var is set to true
+     */
+    public var backdropOverlayCornerRadius: CGFloat = 10
     
     // Singleton
     public static var shared = HexagonLoaderConfig()
@@ -77,7 +89,7 @@ public struct HexagonLoaderConfig {
     private init() {}
 }
 
-public class HexagonLoaderView: UIView {
+internal class HexagonLoaderView: UIView {
 
     fileprivate var shapes: [CAShapeLayer]!
     fileprivate var transforms: [CAKeyframeAnimation]!
@@ -86,8 +98,6 @@ public class HexagonLoaderView: UIView {
     fileprivate lazy var visualEffectsView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     fileprivate lazy var loaderBackdropView: UIView = {
         let view = UIView()
-        view.backgroundColor = HexagonLoaderConfig.shared.transparentBackdropColor
-        view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         return view
     }()
@@ -111,10 +121,10 @@ extension HexagonLoaderView {
         let centerShapeFrame = CGRect(x: bounds.width/2 - sideLength/2, y: bounds.height/2 - sideLength/2, width: sideLength, height: sideLength)
         
         //===============
-        // Shapes layer
+        // Hexagon layer
         //===============
         
-        var radiusOfOuterCircle: CGFloat = (sideLength - (HexagonLoaderConfig.shared.shapesInnerOffset * 4)) / 2
+        var radiusOfOuterCircle: CGFloat = (sideLength - (HexagonLoaderConfig.shared.hexagonInnerOffset * 4)) / 2
         let theta: CGFloat = CGFloat(2.0 * M_PI) / CGFloat(numberOfSides)
         let centerX = sideLength / 2
         let centerY = sideLength / 2
@@ -129,10 +139,10 @@ extension HexagonLoaderView {
         shapes = (0 ..< Int(numberOfSides)).map { i in
             let shape = CAShapeLayer()
             shape.frame = centerShapeFrame
-            shape.fillColor = HexagonLoaderConfig.shared.shapeColor.cgColor
+            shape.fillColor = HexagonLoaderConfig.shared.hexagonBackgroundColor.cgColor
             shape.masksToBounds = true
             shape.path = shapePath.cgPath
-            shape.strokeColor = HexagonLoaderConfig.shared.shapeBorderColor.cgColor
+            shape.strokeColor = HexagonLoaderConfig.shared.hexagonBorderColor.cgColor
             
             return shape
         }
@@ -141,6 +151,10 @@ extension HexagonLoaderView {
             layer.addSublayer(shape)
         }
         
+        
+        //==============================
+        // Hexagon transform animation
+        //==============================
         var counter: Double = 0
         transforms = shapes.map { _ in
             let animation = CAKeyframeAnimation(keyPath: "transform")
@@ -159,6 +173,9 @@ extension HexagonLoaderView {
             return animation
         }
         
+        //==============================
+        // Hexagon position animation
+        //==============================
         let startingVertices = 2
         radiusOfOuterCircle = sideLength / 2
         let middleShapeStartingPoint: CGPoint = CGPoint(x: radiusOfOuterCircle * cos(2 * CGFloat.pi * CGFloat(startingVertices) / numberOfSides + theta) + centerShapeFrame.midX, y: radiusOfOuterCircle * sin(2 * CGFloat.pi * CGFloat(startingVertices) / numberOfSides + theta) + centerShapeFrame.midY)
@@ -207,24 +224,34 @@ extension HexagonLoaderView {
         }
 
     }
-    
-    public func startAnimating() {
+}
+
+//MARK:- Public utility methods
+extension HexagonLoaderView {
+    func startAnimating() {
         
         switch HexagonLoaderConfig.shared.backgroundType {
-        case .visualEffectsViewDark:
+        case .light:
             visualEffectsView.frame = frame
             visualEffectsView.effect = UIBlurEffect(style: .dark)
             addSubview(visualEffectsView)
             sendSubview(toBack: visualEffectsView)
-        case .visualEffectsViewLight:
+        case .dark:
             visualEffectsView.frame = frame
             visualEffectsView.effect = UIBlurEffect(style: .light)
             addSubview(visualEffectsView)
             sendSubview(toBack: visualEffectsView)
-        case .transparentWithBackdrop:
-            loaderBackdropView.frame = CGRect(x: self.bounds.width/2 - backdropViewLength/2, y: self.bounds.height/2 - backdropViewLength/2, width: backdropViewLength, height: backdropViewLength)
+        case .transparent:
+            break
+        }
+        
+        if HexagonLoaderConfig.shared.displayBackdropOverlay {
+            loaderBackdropView.frame = CGRect(x: bounds.width/2 - backdropViewLength/2, y: bounds.height/2 - backdropViewLength/2, width: backdropViewLength, height: backdropViewLength)
+            loaderBackdropView.backgroundColor = HexagonLoaderConfig.shared.backdropOverlayColor
+            loaderBackdropView.layer.cornerRadius = HexagonLoaderConfig.shared.backdropOverlayCornerRadius
             addSubview(loaderBackdropView)
             sendSubview(toBack: loaderBackdropView)
+            sendSubview(toBack: visualEffectsView)
         }
         
         CATransaction.begin()
@@ -237,12 +264,11 @@ extension HexagonLoaderView {
         CATransaction.commit()
     }
     
-    public func stopAnimating() {
+    func stopAnimating() {
         shapes.forEach {
             $0.removeAllAnimations()
         }
         visualEffectsView.removeFromSuperview()
         loaderBackdropView.removeFromSuperview()
     }
-    
 }
