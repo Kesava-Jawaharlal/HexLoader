@@ -41,12 +41,12 @@ public struct HexagonLoaderConfig {
     /**
      *  Length of each side
      */
-    public let sideLength: CGFloat = 50
+    public var hexagonSideLength: CGFloat = 50
     
     /**
      *  Inner offset for each Hexagon
      */
-    public let hexagonInnerOffset: CGFloat = 0
+    public var hexagonInnerOffset: CGFloat = 0
     
     /**
      *  Color of Hexagon
@@ -104,19 +104,28 @@ internal class HexagonLoaderView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        addShapes()
+        setup()
     }
     
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        addShapes()
+        setup()
     }
 }
 
 extension HexagonLoaderView {
-    fileprivate func addShapes() {
-        backgroundColor = .clear
-        let sideLength = HexagonLoaderConfig.shared.sideLength
+    func setup() {
+        
+        if HexagonLoaderConfig.shared.displayBackdropOverlay {
+            loaderBackdropView.frame = CGRect(x: bounds.width/2 - backdropViewLength/2, y: bounds.height/2 - backdropViewLength/2, width: backdropViewLength, height: backdropViewLength)
+            loaderBackdropView.backgroundColor = HexagonLoaderConfig.shared.backdropOverlayColor
+            loaderBackdropView.layer.cornerRadius = HexagonLoaderConfig.shared.backdropOverlayCornerRadius
+            addSubview(loaderBackdropView)
+            sendSubview(toBack: loaderBackdropView)
+            sendSubview(toBack: visualEffectsView)
+        }
+        
+        let sideLength = HexagonLoaderConfig.shared.hexagonSideLength
         
         let centerShapeFrame = CGRect(x: bounds.width/2 - sideLength/2, y: bounds.height/2 - sideLength/2, width: sideLength, height: sideLength)
         
@@ -143,7 +152,7 @@ extension HexagonLoaderView {
             shape.masksToBounds = true
             shape.path = shapePath.cgPath
             shape.strokeColor = HexagonLoaderConfig.shared.hexagonBorderColor.cgColor
-            
+            shape.isHidden = true
             return shape
         }
         
@@ -224,12 +233,20 @@ extension HexagonLoaderView {
         }
 
     }
+    
+    func removeSublayersIfNeeded() {
+        layer.sublayers?.forEach({ (subLayer) in
+            if let subLayer = subLayer as? CAShapeLayer {
+                subLayer.removeFromSuperlayer()
+            }
+        })
+    }
 }
 
 //MARK:- Public utility methods
 extension HexagonLoaderView {
+    
     func startAnimating() {
-        
         switch HexagonLoaderConfig.shared.backgroundType {
         case .light:
             visualEffectsView.frame = frame
@@ -245,18 +262,10 @@ extension HexagonLoaderView {
             break
         }
         
-        if HexagonLoaderConfig.shared.displayBackdropOverlay {
-            loaderBackdropView.frame = CGRect(x: bounds.width/2 - backdropViewLength/2, y: bounds.height/2 - backdropViewLength/2, width: backdropViewLength, height: backdropViewLength)
-            loaderBackdropView.backgroundColor = HexagonLoaderConfig.shared.backdropOverlayColor
-            loaderBackdropView.layer.cornerRadius = HexagonLoaderConfig.shared.backdropOverlayCornerRadius
-            addSubview(loaderBackdropView)
-            sendSubview(toBack: loaderBackdropView)
-            sendSubview(toBack: visualEffectsView)
-        }
-        
         CATransaction.begin()
         
         shapes.enumerated().forEach { (idx, shape) in
+            shape.isHidden = false
             shape.add(transforms[idx], forKey: "transform")
             shape.add(pathAnimations[idx], forKey: "position")
         }

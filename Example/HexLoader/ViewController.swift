@@ -38,13 +38,14 @@ extension ViewController {
     }
     
     @IBAction func showDefaultLoaderWithLightEffect() {
+        HexagonLoaderConfig.shared.hexagonSideLength = 100
         HexagonLoaderConfig.shared.backgroundType = .light
         startLoading()
         stopLoaderInFiveSeconds()
     }
     
     func stopLoaderInFiveSeconds() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(15)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(5)) {
             self.stopLoading()
         }
     }

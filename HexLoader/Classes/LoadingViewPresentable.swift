@@ -35,6 +35,9 @@ extension LoadingViewPresentable where Self: UIViewController {
 //MARK: - Public Utility Methods
 extension UIViewController: LoadingViewPresentable {
     public func startLoading() {
+        mainLoadingView.removeSublayersIfNeeded()
+        mainLoadingView.setup()
+        
         view.addSubview(mainLoadingView)
         mainLoadingView.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
