@@ -1,0 +1,16 @@
+PODS:
+  - HexLoader (0.1.0)
+
+DEPENDENCIES:
+  - HexLoader (from `../`)
+
+EXTERNAL SOURCES:
+  HexLoader:
+    :path: ../
+
+SPEC CHECKSUMS:
+  HexLoader: 4a4528bd120e60d7423a8e72c6090bde677166a6
+
+PODFILE CHECKSUM: 3fda40c38cdf3c18e8a1e3ed9d40256a5b86fb14
+
+COCOAPODS: 1.1.1
