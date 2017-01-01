@@ -1,15 +1,7 @@
-#
-# Be sure to run `pod lib lint HexLoader.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'HexLoader'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of HexLoader.'
+  s.summary          = 'The library has a hexagon shaped loader with can customised in numerous ways as documented'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,26 +9,13 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = 'This is a generic library to load a hexagon shaped loading indicator. Its highly customisable and used CAShapeLayer to draw the shapes directly on the UIView'
+  
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/HexLoader'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/Kesava-Jawaharlal/HexLoader'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Kesavasankar Jawaharlal' => 'kesava.jawaharlal@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/HexLoader.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  s.source           = { :git => 'https://github.com/Kesava-Jawaharlal/HexLoader.git', :tag => s.version }
   s.ios.deployment_target = '8.0'
-
-  s.source_files = 'HexLoader/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'HexLoader' => ['HexLoader/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.source_files = 'HexLoader/Classes/**/*.swift'
 end
