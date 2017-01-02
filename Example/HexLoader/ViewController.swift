@@ -37,6 +37,7 @@ class ViewController: UIViewController {
             hexagonBGColorButton.layer.cornerRadius = 3
         }
     }
+    @IBOutlet weak var loadingTextlabel: UITextField!
     var buttonTappedForColorSelection: UIButton?
     var selectedBackgroundType: HexagonLoaderBackground?
     
@@ -86,7 +87,12 @@ extension ViewController {
             HexagonLoaderConfig.shared.hexagonSideLength = CGFloat(sideLength)
         }
         
-        startLoading()
+        if let loadingText = loadingTextlabel.text {
+            startLoading(with: loadingText)
+        } else {
+            startLoading()
+        }
+        
         stopLoaderInFiveSeconds()
     }
 

@@ -34,9 +34,9 @@ extension LoadingViewPresentable where Self: UIViewController {
 
 //MARK: - Public Utility Methods
 extension UIViewController: LoadingViewPresentable {
-    public func startLoading() {
+    public func startLoading(with loadingText: String) {
         mainLoadingView.removeSublayersIfNeeded()
-        mainLoadingView.setup()
+        mainLoadingView.setup(with: loadingText)
         
         view.addSubview(mainLoadingView)
         mainLoadingView.isHidden = false
@@ -47,8 +47,11 @@ extension UIViewController: LoadingViewPresentable {
         }
     }
     
+    public func startLoading() {
+        startLoading(with: "")
+    }
+    
     public func stopLoading() {
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector:#selector(startLoading), object:nil)
         mainLoadingView.stopAnimating()
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {

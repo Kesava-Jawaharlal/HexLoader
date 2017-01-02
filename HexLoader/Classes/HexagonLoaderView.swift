@@ -24,7 +24,6 @@
 import UIKit
 
 private let steps = 25
-private let backdropViewLength: CGFloat = 250
 private let numberOfSides: CGFloat = 6
 
 public enum HexagonLoaderBackground: String {
@@ -85,6 +84,11 @@ public struct HexagonLoaderConfig {
      */
     public var backdropOverlayCornerRadius: CGFloat = 10
     
+    /**
+    * Loading Text Font
+    */
+    public var loadingTextFont: UIFont = UIFont.systemFont(ofSize: 17)
+    
     // Singleton
     public static var shared = HexagonLoaderConfig()
     
@@ -103,6 +107,15 @@ internal class HexagonLoaderView: UIView {
         view.layer.masksToBounds = true
         return view
     }()
+    fileprivate var loadingText: String?
+    fileprivate lazy var loadingTextLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        return label
+    }()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -116,10 +129,24 @@ internal class HexagonLoaderView: UIView {
 }
 
 extension HexagonLoaderView {
+    
+    func setup(with loadingText: String) {
+        self.loadingText = loadingText
+        setup()
+    }
+    
     func setup() {
-        
+        let sideLength = HexagonLoaderConfig.shared.hexagonSideLength
+
         if HexagonLoaderConfig.shared.displayBackdropOverlay {
-            loaderBackdropView.frame = CGRect(x: bounds.width/2 - backdropViewLength/2, y: bounds.height/2 - backdropViewLength/2, width: backdropViewLength, height: backdropViewLength)
+            var heightOffset: CGFloat = 0
+            if let loadingText = loadingText, loadingText != "" {
+                loadingTextLabel.text = loadingText
+                heightOffset = loadingTextLabel.sizeOfTextForLabel(withMaxSize: CGSize(width: sideLength * 3 + 40, height: 42)).height
+            }
+                
+            let backdropHeight = sideLength * 3 + 40 + heightOffset
+            loaderBackdropView.frame = CGRect(x: bounds.width/2 - backdropHeight/2, y: bounds.height/2 - backdropHeight/2, width: backdropHeight, height: backdropHeight + heightOffset)
             loaderBackdropView.backgroundColor = HexagonLoaderConfig.shared.backdropOverlayColor
             loaderBackdropView.layer.cornerRadius = HexagonLoaderConfig.shared.backdropOverlayCornerRadius
             addSubview(loaderBackdropView)
@@ -127,7 +154,6 @@ extension HexagonLoaderView {
             sendSubview(toBack: visualEffectsView)
         }
         
-        let sideLength = HexagonLoaderConfig.shared.hexagonSideLength
         
         let centerShapeFrame = CGRect(x: bounds.width/2 - sideLength/2, y: bounds.height/2 - sideLength/2, width: sideLength, height: sideLength)
         
@@ -198,6 +224,7 @@ extension HexagonLoaderView {
         var yPosition: CGFloat = middleShapeStartingPoint.y - sideLength/4 - radiusOfOuterCircle
         var completedShapesCount: Int = 1
         counter = 1
+        var positionOfLastHexagon: CGPoint?
         pathAnimations = shapes.map { _ in
             let animation = CAKeyframeAnimation(keyPath: "position")
             animation.duration = duration * HexagonLoaderConfig.shared.speed
@@ -219,6 +246,7 @@ extension HexagonLoaderView {
             } else if completedShapesCount == 6 {
                 xPosition = centerShapeFrame.midX
                 yPosition = centerShapeFrame.midY
+                positionOfLastHexagon = CGPoint(x: xPosition, y: yPosition)
             } else {
                 xPosition = xPosition + radiusOfInnnerCircle*2
             }
@@ -233,7 +261,15 @@ extension HexagonLoaderView {
             
             return animation
         }
-
+        
+        if let loadingText = loadingText, loadingText != "" {
+            loadingTextLabel.font = HexagonLoaderConfig.shared.loadingTextFont
+            loadingTextLabel.text = loadingText
+            let height = loadingTextLabel.sizeOfTextForLabel(withMaxSize: CGSize(width: UIScreen.main.bounds.width - 40, height: 42)).height
+            loadingTextLabel.frame = CGRect(x: 20, y: positionOfLastHexagon!.y + sideLength + 40, width: sideLength * 3 + 40, height: height)
+            loadingTextLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: loadingTextLabel.frame.minY)
+            addSubview(loadingTextLabel)
+        }
     }
     
     func removeSublayersIfNeeded() {
@@ -281,5 +317,18 @@ extension HexagonLoaderView {
         }
         visualEffectsView.removeFromSuperview()
         loaderBackdropView.removeFromSuperview()
+        loadingText = nil
+        loadingTextLabel.removeFromSuperview()
+    }
+}
+
+
+extension UILabel {
+    func sizeOfTextForLabel(withMaxSize maxSize:CGSize) -> CGRect {
+        if let txt = self.text {
+            return txt.boundingRect(with: maxSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes:[NSFontAttributeName: self.font], context: nil)
+        } else {
+            return CGRect.zero
+        }
     }
 }
