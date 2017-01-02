@@ -11,6 +11,11 @@ This is a open source library which shows a hexagon shaped loading indictor, dev
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+## Screenshots
+Dark Background            |  Light Background
+:-------------------------:|:-------------------------:
+![](https://github.com/Kesava-Jawaharlal/HexLoader/tree/master/Resources/HexLoaderDarkBackground.gif)  |  ![](https://github.com/Kesava-Jawaharlal/HexLoader/tree/master/Resources/HexLoaderLightBackground.gif)
+
 ## Requirements
 
 ## Installation
@@ -45,7 +50,7 @@ stopLoading()
 
 ## Author
 
-Kesavasankar Jawaharlal, kesava.jawaharlal@gmail.com
+Kesava Jawaharlal, kesava.jawaharlal@gmail.com
 
 ## License
 
