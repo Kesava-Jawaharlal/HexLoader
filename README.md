@@ -16,7 +16,6 @@ Dark Background            |  Light Background
 :-------------------------:|:-------------------------:
 ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderDarkBackground.gif)  |  ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderLightBackground.gif)
 Transparent Background     |  Dark Background without backdrop
-:-------------------------:|:-------------------------:
 ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderTransparentBackground.gif)  |  ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderDarkBackgroundBare.gif)
 
 ## Requirements
