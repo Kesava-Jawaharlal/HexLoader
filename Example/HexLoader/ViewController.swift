@@ -9,41 +9,64 @@
 import UIKit
 import HexLoader
 import MapKit
+import Color_Picker_for_iOS
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    //MARK: - Vars
+    @IBOutlet weak var backldropCornerRadiusTextField: UITextField!
+    @IBOutlet weak var backdropBGColorButton: UIButton! {
+        didSet {
+            backdropBGColorButton.layer.cornerRadius = 3
+        }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet weak var displayBackdropOverlaySwitch: UISwitch!
+    @IBOutlet weak var animationSpeedTextField: UITextField!
+    @IBOutlet weak var HexagonInnerOffsetTextField: UITextField!
+    @IBOutlet weak var hexagonBorderColorButton: UIButton! {
+        didSet {
+            hexagonBorderColorButton.layer.cornerRadius = 3
+        }
     }
+    @IBOutlet weak var backgroundTypeButton: UIButton!
+    @IBOutlet weak var hexagonSideLengthTextField: UITextField!
+    @IBOutlet weak var hexagonBGColorButton: UIButton! {
+        didSet {
+            hexagonBGColorButton.layer.cornerRadius = 3
+        }
+    }
+    var buttonTappedForColorSelection: UIButton?
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let colorPickerViewController = segue.destination as? ColorPickerViewController {
+            colorPickerViewController.delegate = self
+        }
+    }
 }
 
 //MARK: - Actiosn
 extension ViewController {
-    @IBAction func showDefaultLoader() {
+    @IBAction func showHexLoader() {
         HexagonLoaderConfig.shared.backgroundType = .dark
         stopLoaderInFiveSeconds()
         startLoading()        
     }
-    @IBAction func showLoaderWithTransparentbackground() {
-        HexagonLoaderConfig.shared.backgroundType = .transparent
-        HexagonLoaderConfig.shared.backdropOverlayColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        startLoading()
-        stopLoaderInFiveSeconds()
+
+    @IBAction func showHexagonBorderColorSelector() {
+        buttonTappedForColorSelection = hexagonBorderColorButton
+        performSegue(withIdentifier: "showColorPickerSegue", sender: self)
     }
-    
-    @IBAction func showDefaultLoaderWithLightEffect() {
-        HexagonLoaderConfig.shared.hexagonSideLength = 100
-        HexagonLoaderConfig.shared.backgroundType = .light
-        startLoading()
-        stopLoaderInFiveSeconds()
+    @IBAction func showHexBGColorSelector() {
+        buttonTappedForColorSelection = hexagonBGColorButton
+        performSegue(withIdentifier: "showColorPickerSegue", sender: self)
     }
-    
+    @IBAction func showBackgroundTypeSelector() {
+    }
+    @IBAction func showBackdropBGColorSelector() {
+        buttonTappedForColorSelection = backdropBGColorButton
+        performSegue(withIdentifier: "showColorPickerSegue", sender: self)
+    }
+
     func stopLoaderInFiveSeconds() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(5)) {
             self.stopLoading()
@@ -51,3 +74,8 @@ extension ViewController {
     }
 }
 
+extension ViewController: ColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ controller: ColorPickerViewController, didSelectColor color: UIColor) {
+        buttonTappedForColorSelection?.backgroundColor = color
+    }
+}

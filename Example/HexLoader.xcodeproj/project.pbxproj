@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AE7C7501E1A68AC00755DFB /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE7C74F1E1A68AC00755DFB /* ColorPickerViewController.swift */; };
 		48196CF20576007983C3629A /* Pods_HexLoader_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A87A918AD71F3B6B37B464A /* Pods_HexLoader_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AE7C74F1E1A68AC00755DFB /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		0C5B336930019E85E5405BE4 /* Pods-HexLoader_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexLoader_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-HexLoader_Example/Pods-HexLoader_Example.release.xcconfig"; sourceTree = "<group>"; };
 		0E4D3E51D2E047A2A1E4205D /* Pods-HexLoader_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexLoader_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HexLoader_Tests/Pods-HexLoader_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		3A748A35139B9601642D49BB /* HexLoader.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HexLoader.podspec; path = ../HexLoader.podspec; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				0AE7C74F1E1A68AC00755DFB /* ColorPickerViewController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -363,6 +366,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				0AE7C7501E1A68AC00755DFB /* ColorPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

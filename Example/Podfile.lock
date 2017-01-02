@@ -1,7 +1,9 @@
 PODS:
+  - Color-Picker-for-iOS (2.0.2)
   - HexLoader (0.1.0)
 
 DEPENDENCIES:
+  - Color-Picker-for-iOS (~> 2.0)
   - HexLoader (from `../`)
 
 EXTERNAL SOURCES:
@@ -9,8 +11,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
+  Color-Picker-for-iOS: 4980589b3e3cfe7198f227dd50be9adb02d8bc0b
   HexLoader: 492084e6c733c1df78fb7e2ff0a29c0887370b32
 
-PODFILE CHECKSUM: 3fda40c38cdf3c18e8a1e3ed9d40256a5b86fb14
+PODFILE CHECKSUM: 947658df3cbb096f4b6d9bc6eaa856951379cfc5
 
 COCOAPODS: 1.1.1

@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'HexLoader_Example' do
   pod 'HexLoader', :path => '../'
+  pod 'Color-Picker-for-iOS', '~> 2.0'
 
   target 'HexLoader_Tests' do
     inherit! :search_paths
