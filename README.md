@@ -22,9 +22,12 @@ it, simply add the following line to your Podfile:
 pod "HexLoader"
 ```
 
+## Manual Installation
+Just copy the files under 'HexLoader/Classes' folder to get going.
+
 ## Usage
 
-The library has a protocol extension named 'LoadingViewPresentable', which enables any view controller to call the library easily without any boiler plate code. The indicator can be called using two public methods from any UIViewController. All you need to call any of the below two functions from any of your UIViewControllers.
+The library has a protocol extension named 'LoadingViewPresentable', which enables any view controller to call the library easily without any boiler plate code. To start the loader, all you need to call any of the below two public functions, which were part of the protocol extension, from any of your UIViewControllers.
 
 ```swift
 startLoading()
@@ -34,7 +37,7 @@ or call the below function to have some text beneath the indicator.
 startLoading(with: "Loading...")
 ```
 
-The indicator can be stopped by calling the below 
+The indicator can be stopped by calling the below function
 ```swift
 stopLoading()
 ```
