@@ -14,7 +14,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Screenshots
 Dark Background            |  Light Background
 :-------------------------:|:-------------------------:
-![](https://github.com/Kesava-Jawaharlal/HexLoader/tree/master/Resources/HexLoaderDarkBackground.gif)  |  ![](https://github.com/Kesava-Jawaharlal/HexLoader/tree/master/Resources/HexLoaderLightBackground.gif)
+![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderDarkBackground.gif)  |  ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderLightBackground.gif)
 
 ## Requirements
 
