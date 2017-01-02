@@ -27,10 +27,12 @@ private let steps = 25
 private let backdropViewLength: CGFloat = 250
 private let numberOfSides: CGFloat = 6
 
-public enum HexagonLoaderBackground {
+public enum HexagonLoaderBackground: String {
     case light
     case dark
     case transparent
+    
+    public static let all:[HexagonLoaderBackground] = [.light, .dark, transparent]
 }
 
 /**
@@ -41,12 +43,12 @@ public struct HexagonLoaderConfig {
     /**
      *  Length of each side
      */
-    public var hexagonSideLength: CGFloat = 50
+    public var hexagonSideLength: CGFloat = 60
     
     /**
      *  Inner offset for each Hexagon
      */
-    public var hexagonInnerOffset: CGFloat = 0
+    public var hexagonInnerOffset: CGFloat = 2
     
     /**
      *  Color of Hexagon
@@ -56,7 +58,7 @@ public struct HexagonLoaderConfig {
     /**
      *  Color of Hexagon border
      */
-    public var hexagonBorderColor = UIColor.red
+    public var hexagonBorderColor = UIColor.white
     
     /**
      *  Speed of the spinner
@@ -76,7 +78,7 @@ public struct HexagonLoaderConfig {
     /**
      *  Backdrop Overlay Color. This will be used only if'displayBackdropOverlay' var is set to true
      */
-    public var backdropOverlayColor: UIColor = .gray
+    public var backdropOverlayColor: UIColor = #colorLiteral(red: 0.4156862745, green: 0.7176470588, blue: 0.968627451, alpha: 1)
     
     /**
      *  Backdrop Overlay Corner Radius. This will be used only if'displayBackdropOverlay' var is set to true
@@ -250,12 +252,12 @@ extension HexagonLoaderView {
         switch HexagonLoaderConfig.shared.backgroundType {
         case .light:
             visualEffectsView.frame = frame
-            visualEffectsView.effect = UIBlurEffect(style: .dark)
+            visualEffectsView.effect = UIBlurEffect(style: .light)
             addSubview(visualEffectsView)
             sendSubview(toBack: visualEffectsView)
         case .dark:
             visualEffectsView.frame = frame
-            visualEffectsView.effect = UIBlurEffect(style: .light)
+            visualEffectsView.effect = UIBlurEffect(style: .dark)
             addSubview(visualEffectsView)
             sendSubview(toBack: visualEffectsView)
         case .transparent:
