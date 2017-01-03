@@ -60,18 +60,13 @@ public struct HexagonLoaderConfig {
     public var hexagonBorderColor = UIColor.white
     
     /**
-     *  Speed of the spinner
-     */
-    public var speed: Double = 1
-    
-    /**
      *  Background Type
      */
     public var backgroundType: HexagonLoaderBackground = .transparent
     
     /**
-    * Boolean to indicate if a backdrop over lay is needed to be displayed
-    */
+     * Boolean to indicate if a backdrop over lay is needed to be displayed
+     */
     public var displayBackdropOverlay: Bool = true
     
     /**
@@ -93,6 +88,11 @@ public struct HexagonLoaderConfig {
      * Loading Text Color
      */
     public var loadingTextColor: UIColor = .white
+    
+    /**
+     *  Animation Speed of the loader
+     */
+    public var animationSpeed: Double = 1
     
     // Singleton
     public static var shared = HexagonLoaderConfig()
@@ -200,7 +200,7 @@ extension HexagonLoaderView {
         var counter: Double = 0
         transforms = shapes.map { _ in
             let animation = CAKeyframeAnimation(keyPath: "transform")
-            animation.duration = duration * HexagonLoaderConfig.shared.speed
+            animation.duration = duration * HexagonLoaderConfig.shared.animationSpeed
             animation.repeatCount = .infinity
             animation.values = [
                 NSValue(caTransform3D: CATransform3DMakeScale(0.0, 0.0, 1.0)),
@@ -232,7 +232,7 @@ extension HexagonLoaderView {
         var positionOfLastHexagon: CGPoint?
         pathAnimations = shapes.map { _ in
             let animation = CAKeyframeAnimation(keyPath: "position")
-            animation.duration = duration * HexagonLoaderConfig.shared.speed
+            animation.duration = duration * HexagonLoaderConfig.shared.animationSpeed
             animation.repeatCount = .infinity
             animation.values = [
                 NSValue(cgPoint: CGPoint(x: centerShapeFrame.midX, y: centerShapeFrame.midY)),

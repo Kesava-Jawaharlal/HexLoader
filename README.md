@@ -12,7 +12,7 @@ This is a open source library which shows a hexagon shaped loading indictor, dev
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Screenshots
-Dark Background            |  Light Background
+Dark Background with Loading Text            |  Light Background without Loading Text and no inner offset
 :-------------------------:|:-------------------------:
 ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderDarkBackground.gif)  |  ![](https://github.com/Kesava-Jawaharlal/HexLoader/blob/master/Resources/HexLoaderLightBackground.gif)
 Transparent Background     |  Dark Background without backdrop
@@ -49,6 +49,66 @@ startLoading(with: "Loading...")
 The indicator can be stopped by calling the below function
 ```swift
 stopLoading()
+```
+## Configuration
+The loader has an extensive list of customisations exposed through a Singleton class 'HexLoaderConfig'. Below are the params available
+```swift
+
+	/**
+     *  Length of each side
+     */
+    HexagonLoaderConfig.shared.hexagonSideLength = 60
+    
+    /**
+     *  Inner offset for each Hexagon
+     */
+    HexagonLoaderConfig.shared.hexagonInnerOffset = 2
+    
+    /**
+     *  Color of Hexagon
+     */
+    HexagonLoaderConfig.shared.hexagonBackgroundColor = .white
+    
+    /**
+     *  Color of Hexagon border
+     */
+    HexagonLoaderConfig.shared.hexagonBorderColor = white
+        
+    /**
+     *  Background Type
+     */
+    HexagonLoaderConfig.shared.backgroundType = .transparent
+    
+    /**
+    * Boolean to indicate if a backdrop over lay is needed to be displayed
+    */
+    HexagonLoaderConfig.shared.displayBackdropOverlay = true
+    
+    /**
+     *  Backdrop Overlay Color. This will be used only if'displayBackdropOverlay' var is set to true
+     */
+    HexagonLoaderConfig.shared.backdropOverlayColor = #colorLiteral(red: 0.4156862745, green: 0.7176470588, blue: 0.968627451, alpha: 1)
+    
+    /**
+     *  Backdrop Overlay Corner Radius. This will be used only if'displayBackdropOverlay' var is set to true
+     */
+    HexagonLoaderConfig.shared.backdropOverlayCornerRadius = 10
+    
+    /**
+    * Loading Text Font
+    */
+    HexagonLoaderConfig.shared.loadingTextFont = UIFont.systemFont(ofSize: 17)
+    
+    /**
+     * Loading Text Color
+     */
+    HexagonLoaderConfig.shared.loadingTextColor = .white
+    
+    /**
+     *  Animation Speed of the loader
+     */
+    HexagonLoaderConfig.shared.animationSpeed = 1
+
 ```
 
 

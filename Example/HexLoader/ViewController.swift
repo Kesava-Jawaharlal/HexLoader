@@ -14,17 +14,13 @@ import Color_Picker_for_iOS
 class ViewController: UIViewController {
 
     //MARK: - Vars
-    @IBOutlet weak var backldropCornerRadiusTextField: UITextField!
-    @IBOutlet weak var backdropBGColorButton: UIButton! {
+    @IBOutlet weak var hexagonBGColorButton: UIButton! {
         didSet {
-            backdropBGColorButton.layer.cornerRadius = 5
-            backdropBGColorButton.layer.borderWidth = 1
-            backdropBGColorButton.layer.borderColor = UIColor.white.cgColor
+            hexagonBGColorButton.layer.cornerRadius = 5
+            hexagonBGColorButton.layer.borderWidth = 1
+            hexagonBGColorButton.layer.borderColor = UIColor.white.cgColor
         }
     }
-    @IBOutlet weak var displayBackdropOverlaySwitch: UISwitch!
-    @IBOutlet weak var animationSpeedTextField: UITextField!
-    @IBOutlet weak var HexagonInnerOffsetTextField: UITextField!
     @IBOutlet weak var hexagonBorderColorButton: UIButton! {
         didSet {
             hexagonBorderColorButton.layer.cornerRadius = 5
@@ -32,13 +28,16 @@ class ViewController: UIViewController {
             hexagonBorderColorButton.layer.borderColor = UIColor.white.cgColor
         }
     }
-    @IBOutlet weak var backgroundTypeButton: UIButton!
+    @IBOutlet weak var HexagonInnerOffsetTextField: UITextField!
     @IBOutlet weak var hexagonSideLengthTextField: UITextField!
-    @IBOutlet weak var hexagonBGColorButton: UIButton! {
+    @IBOutlet weak var backgroundTypeButton: UIButton!
+    @IBOutlet weak var displayBackdropOverlaySwitch: UISwitch!
+    @IBOutlet weak var backldropCornerRadiusTextField: UITextField!
+    @IBOutlet weak var backdropBGColorButton: UIButton! {
         didSet {
-            hexagonBGColorButton.layer.cornerRadius = 5
-            hexagonBGColorButton.layer.borderWidth = 1
-            hexagonBGColorButton.layer.borderColor = UIColor.white.cgColor
+            backdropBGColorButton.layer.cornerRadius = 5
+            backdropBGColorButton.layer.borderWidth = 1
+            backdropBGColorButton.layer.borderColor = UIColor.white.cgColor
         }
     }
     @IBOutlet weak var loadingTextlabel: UITextField!
@@ -49,6 +48,8 @@ class ViewController: UIViewController {
             loadingTextColorButton.layer.borderColor = UIColor.white.cgColor
         }
     }
+    @IBOutlet weak var animationSpeedTextField: UITextField!
+    
     var buttonTappedForColorSelection: UIButton?
     var selectedBackgroundType: HexagonLoaderBackground?
     
@@ -86,7 +87,7 @@ extension ViewController {
         }
         if let animationSpeedString = animationSpeedTextField.text,
             let speed = Double(animationSpeedString) {
-            HexagonLoaderConfig.shared.speed = speed
+            HexagonLoaderConfig.shared.animationSpeed = speed
         }
         if let cornerRadiusString = backldropCornerRadiusTextField.text,
             let cornerRadius = Float(cornerRadiusString) {
