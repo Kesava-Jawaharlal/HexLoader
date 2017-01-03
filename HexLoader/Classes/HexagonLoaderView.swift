@@ -89,6 +89,11 @@ public struct HexagonLoaderConfig {
     */
     public var loadingTextFont: UIFont = UIFont.systemFont(ofSize: 17)
     
+    /**
+     * Loading Text Color
+     */
+    public var loadingTextColor: UIColor = .white
+    
     // Singleton
     public static var shared = HexagonLoaderConfig()
     
@@ -265,6 +270,7 @@ extension HexagonLoaderView {
         if let loadingText = loadingText, loadingText != "" {
             loadingTextLabel.font = HexagonLoaderConfig.shared.loadingTextFont
             loadingTextLabel.text = loadingText
+            loadingTextLabel.textColor = HexagonLoaderConfig.shared.loadingTextColor
             let height = loadingTextLabel.sizeOfTextForLabel(withMaxSize: CGSize(width: UIScreen.main.bounds.width - 40, height: 42)).height
             loadingTextLabel.frame = CGRect(x: 20, y: positionOfLastHexagon!.y + sideLength + 40, width: sideLength * 3 + 40, height: height)
             loadingTextLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: loadingTextLabel.frame.minY)

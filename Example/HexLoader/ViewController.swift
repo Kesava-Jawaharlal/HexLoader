@@ -27,17 +27,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var HexagonInnerOffsetTextField: UITextField!
     @IBOutlet weak var hexagonBorderColorButton: UIButton! {
         didSet {
-            hexagonBorderColorButton.layer.cornerRadius = 3
+            hexagonBorderColorButton.layer.cornerRadius = 5
+            hexagonBorderColorButton.layer.borderWidth = 1
+            hexagonBorderColorButton.layer.borderColor = UIColor.white.cgColor
         }
     }
     @IBOutlet weak var backgroundTypeButton: UIButton!
     @IBOutlet weak var hexagonSideLengthTextField: UITextField!
     @IBOutlet weak var hexagonBGColorButton: UIButton! {
         didSet {
-            hexagonBGColorButton.layer.cornerRadius = 3
+            hexagonBGColorButton.layer.cornerRadius = 5
+            hexagonBGColorButton.layer.borderWidth = 1
+            hexagonBGColorButton.layer.borderColor = UIColor.white.cgColor
         }
     }
     @IBOutlet weak var loadingTextlabel: UITextField!
+    @IBOutlet weak var loadingTextColorButton: UIButton! {
+        didSet {
+            loadingTextColorButton.layer.cornerRadius = 5
+            loadingTextColorButton.layer.borderWidth = 1
+            loadingTextColorButton.layer.borderColor = UIColor.white.cgColor
+        }
+    }
     var buttonTappedForColorSelection: UIButton?
     var selectedBackgroundType: HexagonLoaderBackground?
     
@@ -56,6 +67,7 @@ class ViewController: UIViewController {
         hexagonBGColorButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         backdropBGColorButton.backgroundColor = #colorLiteral(red: 0.4156862745, green: 0.7176470588, blue: 0.968627451, alpha: 1)
         hexagonBorderColorButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        loadingTextColorButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 }
 
@@ -65,11 +77,13 @@ extension ViewController {
         
         HexagonLoaderConfig.shared.hexagonBackgroundColor = hexagonBGColorButton.backgroundColor!
         HexagonLoaderConfig.shared.hexagonBorderColor = hexagonBorderColorButton.backgroundColor!
+        HexagonLoaderConfig.shared.backdropOverlayColor = backdropBGColorButton.backgroundColor!
+        HexagonLoaderConfig.shared.loadingTextColor = loadingTextColorButton.backgroundColor!
+        HexagonLoaderConfig.shared.displayBackdropOverlay = displayBackdropOverlaySwitch.isOn
+    
         if let backgroundType = selectedBackgroundType {
             HexagonLoaderConfig.shared.backgroundType = backgroundType
         }
-        HexagonLoaderConfig.shared.backdropOverlayColor = backdropBGColorButton.backgroundColor!
-        HexagonLoaderConfig.shared.displayBackdropOverlay = displayBackdropOverlaySwitch.isOn
         if let animationSpeedString = animationSpeedTextField.text,
             let speed = Double(animationSpeedString) {
             HexagonLoaderConfig.shared.speed = speed
@@ -121,6 +135,10 @@ extension ViewController {
     }
     @IBAction func showBackdropBGColorSelector() {
         buttonTappedForColorSelection = backdropBGColorButton
+        performSegue(withIdentifier: "showColorPickerSegue", sender: self)
+    }
+    @IBAction func showColorPickerForLoadingText() {
+        buttonTappedForColorSelection = loadingTextColorButton
         performSegue(withIdentifier: "showColorPickerSegue", sender: self)
     }
 

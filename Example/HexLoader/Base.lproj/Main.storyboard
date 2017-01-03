@@ -31,7 +31,7 @@
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyQ-ca-mS2">
-                                <rect key="frame" x="20" y="570" width="335" height="30"/>
+                                <rect key="frame" x="20" y="610" width="335" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="NOn-Ho-Q49"/>
@@ -123,6 +123,16 @@
                                     <action selector="showBackdropBGColorSelector" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EOE-ao-QBK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Text Color:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hce-LE-GuK">
+                                <rect key="frame" x="20" y="551" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="OQj-7g-QCx"/>
+                                    <constraint firstAttribute="height" constant="21" id="gmZ-hZ-ft6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hexagon Border Color:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQL-hB-Lgq">
                                 <rect key="frame" x="20" y="264" width="200" height="21"/>
                                 <constraints>
@@ -216,23 +226,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM1-5R-0wd">
+                                <rect key="frame" x="250" y="546.5" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="showBackdropBGColorSelector" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PCV-5j-gTV"/>
+                                    <action selector="showColorPickerForLoadingText" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8ck-Ki-HCZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.66274509803921566" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Vhf-C5-0KE" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="2Gz-n7-2bN"/>
+                            <constraint firstItem="Hce-LE-GuK" firstAttribute="top" secondItem="L3I-Fd-hK5" secondAttribute="bottom" constant="20" id="3SC-d2-jyc"/>
                             <constraint firstItem="z5R-pe-NIv" firstAttribute="top" secondItem="hVa-ck-oB1" secondAttribute="bottom" constant="20" id="4ST-Bk-aqv"/>
+                            <constraint firstItem="xM1-5R-0wd" firstAttribute="leading" secondItem="2D8-mB-FZo" secondAttribute="leading" id="6N9-Oy-g2r"/>
                             <constraint firstItem="CqK-Yl-EtO" firstAttribute="top" secondItem="jOr-Lq-2Zr" secondAttribute="bottom" constant="50" id="6aU-Yv-7lh"/>
                             <constraint firstItem="y4p-Un-4VI" firstAttribute="leading" secondItem="XQL-hB-Lgq" secondAttribute="trailing" constant="30" id="8Xz-XB-0fZ"/>
+                            <constraint firstItem="Hce-LE-GuK" firstAttribute="leading" secondItem="L3I-Fd-hK5" secondAttribute="leading" id="8YO-uc-3TC"/>
                             <constraint firstItem="Wff-ac-mqq" firstAttribute="width" secondItem="XQL-hB-Lgq" secondAttribute="width" id="8ZK-4b-Xv7"/>
                             <constraint firstItem="Wff-ac-mqq" firstAttribute="leading" secondItem="XQL-hB-Lgq" secondAttribute="leading" id="9sW-bw-2jF"/>
                             <constraint firstItem="jOr-Lq-2Zr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="AAF-iV-Sxk"/>
                             <constraint firstItem="Fo0-oV-9ns" firstAttribute="width" secondItem="z5R-pe-NIv" secondAttribute="width" id="Bi6-L9-vvO"/>
                             <constraint firstItem="L3I-Fd-hK5" firstAttribute="leading" secondItem="Fo0-oV-9ns" secondAttribute="leading" id="C8a-rg-aQp"/>
                             <constraint firstItem="L3I-Fd-hK5" firstAttribute="top" secondItem="Fo0-oV-9ns" secondAttribute="bottom" constant="20" id="CsQ-aW-gzM"/>
-                            <constraint firstItem="TyQ-ca-mS2" firstAttribute="top" secondItem="Fo0-oV-9ns" secondAttribute="bottom" constant="80" id="F5n-jk-Bhg"/>
+                            <constraint firstItem="TyQ-ca-mS2" firstAttribute="top" secondItem="Fo0-oV-9ns" secondAttribute="bottom" constant="120" id="F5n-jk-Bhg"/>
                             <constraint firstItem="u0U-Ab-NMr" firstAttribute="leading" secondItem="y4p-Un-4VI" secondAttribute="leading" id="IUh-8h-Aoo"/>
                             <constraint firstItem="Ul8-y3-gAG" firstAttribute="leading" secondItem="z5R-pe-NIv" secondAttribute="trailing" constant="30" id="JYt-tG-P6k"/>
                             <constraint firstItem="z5R-pe-NIv" firstAttribute="leading" secondItem="hVa-ck-oB1" secondAttribute="leading" id="Jhj-aB-RZ3"/>
+                            <constraint firstItem="xM1-5R-0wd" firstAttribute="leading" secondItem="Hce-LE-GuK" secondAttribute="trailing" constant="30" id="KOf-bk-Gb9"/>
                             <constraint firstItem="Ul8-y3-gAG" firstAttribute="centerY" secondItem="z5R-pe-NIv" secondAttribute="centerY" id="Krc-9f-gtE"/>
                             <constraint firstItem="y4p-Un-4VI" firstAttribute="centerY" secondItem="XQL-hB-Lgq" secondAttribute="centerY" id="Lfr-m1-PQN"/>
                             <constraint firstItem="gC0-U9-mV9" firstAttribute="top" secondItem="CqK-Yl-EtO" secondAttribute="bottom" constant="20" id="MRJ-Fk-GLH"/>
@@ -260,6 +282,7 @@
                             <constraint firstItem="Vhf-C5-0KE" firstAttribute="width" secondItem="gC0-U9-mV9" secondAttribute="width" id="jUU-IM-d2f"/>
                             <constraint firstItem="XQL-hB-Lgq" firstAttribute="leading" secondItem="Vhf-C5-0KE" secondAttribute="leading" id="jVc-4f-fKI"/>
                             <constraint firstItem="XQL-hB-Lgq" firstAttribute="width" secondItem="Vhf-C5-0KE" secondAttribute="width" id="jy9-zt-EQD"/>
+                            <constraint firstItem="xM1-5R-0wd" firstAttribute="centerY" secondItem="Hce-LE-GuK" secondAttribute="centerY" id="k0C-Uz-Flj"/>
                             <constraint firstItem="mI5-jj-l5O" firstAttribute="leading" secondItem="u0U-Ab-NMr" secondAttribute="leading" id="kOm-tz-269"/>
                             <constraint firstItem="TyQ-ca-mS2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="m7V-9m-IlK"/>
                             <constraint firstItem="gC0-U9-mV9" firstAttribute="width" secondItem="CqK-Yl-EtO" secondAttribute="width" id="maz-ID-oiA"/>
@@ -285,6 +308,7 @@
                         <outlet property="hexagonBGColorButton" destination="TSa-Wt-ctW" id="fhE-hq-arA"/>
                         <outlet property="hexagonBorderColorButton" destination="y4p-Un-4VI" id="Yof-V4-Auy"/>
                         <outlet property="hexagonSideLengthTextField" destination="uJ6-d2-VWt" id="eFW-Yb-nxL"/>
+                        <outlet property="loadingTextColorButton" destination="xM1-5R-0wd" id="dl5-uP-wAe"/>
                         <outlet property="loadingTextlabel" destination="2D8-mB-FZo" id="Mff-w3-2BL"/>
                         <segue destination="ipb-R4-SSH" kind="presentation" identifier="showColorPickerSegue" id="KMW-pQ-A5Y"/>
                     </connections>
