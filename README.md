@@ -7,6 +7,10 @@
 
 This is a open source library which shows a hexagon shaped loading indictor, developed CAShapeLayer and CABasicAnimation. The library is highly customisable.
 
+## Demo		
+
+Try `HexLoader` on [Appetize.io](https://appetize.io/app/0pdbh3jgh7y9kdmbrrpubqq7vr?device=iphone6s&scale=75&orientation=portrait&osVersion=10).
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
