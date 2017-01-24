@@ -26,12 +26,23 @@ import UIKit
 private let steps = 25
 private let numberOfSides: CGFloat = 6
 
-public enum HexagonLoaderBackground: String {
+public enum HexagonLoaderBackground: Int {
     case light
     case dark
     case transparent
     
     public static let all:[HexagonLoaderBackground] = [.light, .dark, transparent]
+    
+    public func description() -> String {
+        switch self {
+        case .light:
+            return "Light";
+        case .dark:
+            return "Dark";
+        case .transparent :
+            return "Transparent";
+        }
+    }
 }
 
 /**

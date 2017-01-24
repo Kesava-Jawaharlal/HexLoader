@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = 'This is a generic library to load a hexagon shaped loading indicator. Its highly customisable and used CAShapeLayer to draw the shapes directly on the UIView'
-  
 
   s.homepage         = 'https://github.com/Kesava-Jawaharlal/HexLoader'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

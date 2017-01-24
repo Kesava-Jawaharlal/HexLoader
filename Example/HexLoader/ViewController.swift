@@ -123,10 +123,10 @@ extension ViewController {
         let alertVC = UIAlertController(title: "Select a background Type", message: nil, preferredStyle: .actionSheet)
         
         HexagonLoaderBackground.all.forEach { (backgroundType) in
-            alertVC.addAction(UIAlertAction(title: backgroundType.rawValue, style: .default, handler: { [weak self] (action) in
+            alertVC.addAction(UIAlertAction(title: backgroundType.description(), style: .default, handler: { [weak self] (action) in
                 guard let `self` = self else { return }
                 
-                self.backgroundTypeButton.setTitle(backgroundType.rawValue, for: .normal)
+                self.backgroundTypeButton.setTitle(backgroundType.description(), for: .normal)
                 self.selectedBackgroundType = backgroundType
             }))
         }
