@@ -48,7 +48,7 @@ public enum HexagonLoaderBackground: Int {
 /**
  * Loader config
  */
-public struct HexagonLoaderConfig {
+public class HexagonLoaderConfig {
     
     /**
      *  Length of each side
