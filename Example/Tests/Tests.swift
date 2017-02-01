@@ -23,6 +23,11 @@ class Tests: XCTestCase {
         // This is an example of a performance test case.
         self.measure() {
             // Put the code you want to measure the time of here.
+            var numberOfPatches: UInt32 = 0
+            Scanner(string: "464aa23487cace015af841ee008d0286b0").scanHexInt32(&numberOfPatches)
+//            numberOfPatches = UInt32("0003", radix: 16)!
+            
+            print("number of patches \(numberOfPatches)")
         }
     }
     

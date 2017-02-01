@@ -51,6 +51,10 @@ extension UIViewController: LoadingViewPresentable {
         startLoading(with: "")
     }
     
+    public func updateStatusText(_ statusText: String) {
+        mainLoadingView.updateStatusText(statusText)
+    }
+    
     public func stopLoading() {
         mainLoadingView.stopAnimating()
         

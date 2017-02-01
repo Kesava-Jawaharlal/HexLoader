@@ -151,6 +151,13 @@ extension HexagonLoaderView {
         setup()
     }
     
+    func updateStatusText(_ text: String) {
+        loadingText = text
+        
+        loadingTextLabel.text = loadingText
+        //TODO: update the label and whole layout height based on the new text
+    }
+    
     func setup() {
         let sideLength = HexagonLoaderConfig.shared.hexagonSideLength
 

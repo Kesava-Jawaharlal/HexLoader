@@ -108,7 +108,9 @@ extension ViewController {
             startLoading()
         }
         
-        stopLoaderInFiveSeconds()
+        updateLoaderTextInFiveSeconds()
+        
+        stopLoaderInTenSeconds()
     }
 
     @IBAction func showHexagonBorderColorSelector() {
@@ -143,9 +145,15 @@ extension ViewController {
         performSegue(withIdentifier: "showColorPickerSegue", sender: self)
     }
 
-    func stopLoaderInFiveSeconds() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(5)) {
+    func stopLoaderInTenSeconds() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(10)) {
             self.stopLoading()
+        }
+    }
+    
+    func updateLoaderTextInFiveSeconds() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(5)) {
+            self.updateStatusText("New status")
         }
     }
 }
