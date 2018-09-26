@@ -216,7 +216,7 @@ extension HexagonLoaderView {
         // Hexagon transform animation
         //==============================
         var counter: Double = 0
-        transforms = shapes.map { _ in
+        transforms = shapes.map { (_: CAShapeLayer) in
             let animation = CAKeyframeAnimation(keyPath: "transform")
             animation.duration = duration * HexagonLoaderConfig.shared.animationSpeed
             animation.repeatCount = .infinity
@@ -248,7 +248,7 @@ extension HexagonLoaderView {
         var completedShapesCount: Int = 1
         counter = 1
         var positionOfLastHexagon: CGPoint?
-        pathAnimations = shapes.map { _ in
+        pathAnimations = shapes.map { (_: CAShapeLayer) in
             let animation = CAKeyframeAnimation(keyPath: "position")
             animation.duration = duration * HexagonLoaderConfig.shared.animationSpeed
             animation.repeatCount = .infinity
