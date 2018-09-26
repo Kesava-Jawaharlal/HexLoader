@@ -173,8 +173,8 @@ extension HexagonLoaderView {
             loaderBackdropView.backgroundColor = HexagonLoaderConfig.shared.backdropOverlayColor
             loaderBackdropView.layer.cornerRadius = HexagonLoaderConfig.shared.backdropOverlayCornerRadius
             addSubview(loaderBackdropView)
-            sendSubview(toBack: loaderBackdropView)
-            sendSubview(toBack: visualEffectsView)
+            sendSubviewToBack(loaderBackdropView)
+            sendSubviewToBack(visualEffectsView)
         }
         
         
@@ -185,7 +185,7 @@ extension HexagonLoaderView {
         //===============
         
         var radiusOfOuterCircle: CGFloat = (sideLength - (HexagonLoaderConfig.shared.hexagonInnerOffset * 4)) / 2
-        let theta: CGFloat = CGFloat(2.0 * M_PI) / CGFloat(numberOfSides)
+        let theta: CGFloat = CGFloat(2.0 * Double.pi) / CGFloat(numberOfSides)
         let centerX = sideLength / 2
         let centerY = sideLength / 2
         
@@ -216,7 +216,7 @@ extension HexagonLoaderView {
         // Hexagon transform animation
         //==============================
         var counter: Double = 0
-        transforms = shapes.map { _ in
+        transforms = shapes.map { (_: CAShapeLayer) in
             let animation = CAKeyframeAnimation(keyPath: "transform")
             animation.duration = duration * HexagonLoaderConfig.shared.animationSpeed
             animation.repeatCount = .infinity
@@ -248,7 +248,7 @@ extension HexagonLoaderView {
         var completedShapesCount: Int = 1
         counter = 1
         var positionOfLastHexagon: CGPoint?
-        pathAnimations = shapes.map { _ in
+        pathAnimations = shapes.map { (_: CAShapeLayer) in
             let animation = CAKeyframeAnimation(keyPath: "position")
             animation.duration = duration * HexagonLoaderConfig.shared.animationSpeed
             animation.repeatCount = .infinity
@@ -314,12 +314,12 @@ extension HexagonLoaderView {
             visualEffectsView.frame = frame
             visualEffectsView.effect = UIBlurEffect(style: .light)
             addSubview(visualEffectsView)
-            sendSubview(toBack: visualEffectsView)
+            sendSubviewToBack(visualEffectsView)
         case .dark:
             visualEffectsView.frame = frame
             visualEffectsView.effect = UIBlurEffect(style: .dark)
             addSubview(visualEffectsView)
-            sendSubview(toBack: visualEffectsView)
+            sendSubviewToBack(visualEffectsView)
         case .transparent:
             break
         }
@@ -350,9 +350,20 @@ extension HexagonLoaderView {
 extension UILabel {
     func sizeOfTextForLabel(withMaxSize maxSize:CGSize) -> CGRect {
         if let txt = self.text {
-            return txt.boundingRect(with: maxSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes:[NSFontAttributeName: self.font], context: nil)
+            return txt.boundingRect(with: maxSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes:convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font): self.font]), context: nil)
         } else {
             return CGRect.zero
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }
