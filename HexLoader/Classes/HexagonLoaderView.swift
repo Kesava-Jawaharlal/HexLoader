@@ -173,8 +173,8 @@ extension HexagonLoaderView {
             loaderBackdropView.backgroundColor = HexagonLoaderConfig.shared.backdropOverlayColor
             loaderBackdropView.layer.cornerRadius = HexagonLoaderConfig.shared.backdropOverlayCornerRadius
             addSubview(loaderBackdropView)
-            sendSubview(toBack: loaderBackdropView)
-            sendSubview(toBack: visualEffectsView)
+            sendSubviewToBack(loaderBackdropView)
+            sendSubviewToBack(visualEffectsView)
         }
         
         
@@ -314,12 +314,12 @@ extension HexagonLoaderView {
             visualEffectsView.frame = frame
             visualEffectsView.effect = UIBlurEffect(style: .light)
             addSubview(visualEffectsView)
-            sendSubview(toBack: visualEffectsView)
+            sendSubviewToBack(visualEffectsView)
         case .dark:
             visualEffectsView.frame = frame
             visualEffectsView.effect = UIBlurEffect(style: .dark)
             addSubview(visualEffectsView)
-            sendSubview(toBack: visualEffectsView)
+            sendSubviewToBack(visualEffectsView)
         case .transparent:
             break
         }
@@ -350,9 +350,20 @@ extension HexagonLoaderView {
 extension UILabel {
     func sizeOfTextForLabel(withMaxSize maxSize:CGSize) -> CGRect {
         if let txt = self.text {
-            return txt.boundingRect(with: maxSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes:[NSFontAttributeName: self.font], context: nil)
+            return txt.boundingRect(with: maxSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes:convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font): self.font]), context: nil)
         } else {
             return CGRect.zero
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }
