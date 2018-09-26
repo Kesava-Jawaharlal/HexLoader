@@ -185,7 +185,7 @@ extension HexagonLoaderView {
         //===============
         
         var radiusOfOuterCircle: CGFloat = (sideLength - (HexagonLoaderConfig.shared.hexagonInnerOffset * 4)) / 2
-        let theta: CGFloat = CGFloat(2.0 * M_PI) / CGFloat(numberOfSides)
+        let theta: CGFloat = CGFloat(2.0 * Double.pi) / CGFloat(numberOfSides)
         let centerX = sideLength / 2
         let centerY = sideLength / 2
         
